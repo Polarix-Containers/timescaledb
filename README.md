@@ -6,7 +6,7 @@
 
 ### Features & usage
 - Built on the [TimescaleDB Alpine-based image](https://github.com/timescale/timescaledb-docker), to be used as a drop-in replacement.
-- Unprivileged image: you should check your volumes' permissions (eg `/var/lib/postgresql/data`), default UID/GID is 70.
+- Unprivileged image: you should check your volumes' permissions (eg `/var/lib/postgresql/data`), default UID/GID is 200017.
 - Removes unnecessary gosu SUID binary.
 
 ### Sample Docker Compose config
@@ -25,10 +25,10 @@
       test: ["CMD", "pg_isready", "-U", "postgres_user"]
       interval: 15s
       timeout: 5s
-    user: "200012:200012"
+    user: "200017:200017"
     read_only: true
     tmpfs:
-      - /var/run/postgres:size=50M,mode=0770,uid=200012,gid=200012,noexec,nosuid,nodev
+      - /var/run/postgres:size=50M,mode=0770,uid=200017,gid=200017,noexec,nosuid,nodev
     security_opt:
       - "no-new-privileges=true"
     cap_drop:
